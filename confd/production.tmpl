@@ -1,0 +1,22 @@
+{
+  "swagger": {
+    "jsonPath": "{{ getv "/configuration/swagger/json/path" "/api-json" }}",
+    "uiPath": "{{ getv "/configuration/swagger/ui/path" "/api-docs" }}",
+    "portOverride": "{{ getv "/configuration/swagger/port" "80" }}"
+  },
+  "logger": {
+    "level": "{{ getv "/configuration/logger/level" "error" }}"
+  },
+  "kafka": {
+    "clientId": "{{ getv "/configuration/kafka/client/id" "pyramids-creator" }}",
+    "brokers": {{ getv "/configuration/kafka/brokers" "[\"10.28.11.49:9092\"]" }},
+    "topic": "{{ getv "/configuration/kafka/topic" "topic-test-7" }}"
+  },
+  "commonStorage": {
+    "url": "{{ getv "/configuration/storage/service/url" "http://127.0.0.1:8081" }}",
+    "expirationTime": {{ getv "/configuration/storage/export/expiration/days" "30" }}
+  },
+  "bbox": {
+    "limit": "{{ getv "/configuration/bbox/area/square/km/limit" "10000" }}"
+  }
+}

@@ -1,0 +1,15 @@
+ [template]
+src = "production.tmpl"
+dest = "/config/production.json"
+keys = [
+    "/configuration/logger/level",
+    "/configuration/swagger/json/path",
+    "/configuration/swagger/ui/path",
+    "/configuration/swagger/port",
+    "/configuration/kafka/client/id",
+    "/configuration/kafka/brokers",
+    "/configuration/kafka/topic",
+    "/configuration/storage/service/url",
+    "/configuration/storage/export/expiration/days",
+    "/configuration/bbox/area/square/km/limit"
+]

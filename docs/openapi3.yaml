@@ -1,0 +1,114 @@
+openapi: 3.0.1
+info:
+  title: pyramids-creator
+  description: Service that responsible for activating the export geopackage process
+  version: 1.0.0
+servers:
+  - url: http://localhost:80
+paths:
+  /test:
+    get:
+      tags:
+        - Test Execution Status
+      summary: Get the test
+      operationId: getTest
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/testStatus'
+        500:
+          description: Server Error
+          content: {}
+
+components:
+  schemas:
+    testStatus:
+      type: array
+      items:
+        type: object
+        properties:
+          taskId:
+            type: string
+            format: uuid
+            description: unique task id
+          userId:
+            type: string
+            description: user unique id
+          directoryName:
+            type: string
+            description: the directory where the file is stored
+            pattern: '^[a-zA-Z0-9_-]+$'
+          fileName:
+            type: string
+            description: file name
+            pattern: '^[a-zA-Z0-9_-]+$'
+          sizeEst:
+            type: number
+            description: file's estimated size
+          realSize:
+            type: number
+            description: file's real size
+          polygon:
+            type: object
+            properties:
+              type:
+                type: string
+              coordinates:
+                type: array
+                items:
+                  type: array
+                  items:
+                    type: array
+                    items:
+                      type: integer
+            description: the exported polygon
+          status:
+            type: string
+            enum: [Pending, In-Progress, Completed, Failed]
+            description: export status
+          link:
+            type: string
+            description: file's full location
+          creationDate:
+            type: string
+            description: export's creation date
+            format: date-time
+          lastUpdateTime:
+            type: string
+            description: export's update time
+            format: date-time
+          expirationTime:
+            type: string
+            description: export's expiration time
+            format: date-time
+          progress:
+            type: number
+            description: export's progress %
+
+        example:
+          taskId: acb2dd1f-c7cc-4600-bf31-fb42ff387ee2
+          userId: tester
+          directoryName: saas
+          fileName: z
+          realSize: 0.12
+          polygon:
+            type: Polygon,
+            coordinates:
+              [
+                [
+                  [34.7862839772771, 32.0933739075861],
+                  [34.7865314250815, 32.0933739075861],
+                  [34.7865314250815, 32.093634611523],
+                  [34.7862839772771, 32.093634611523],
+                  [34.7862839772771, 32.0933739075861],
+                ],
+              ]
+          status: Completed
+          link: /saas/z.GPKG
+          creationDate: 2020-11-10T12:09:01.000Z
+          lastUpdateTime: 2020-11-10T12:09:22.000Z
+          expirationTime: 2020-12-10T12:09:01.000Z
+          progress: 100
